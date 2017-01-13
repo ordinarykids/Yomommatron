@@ -1,5 +1,8 @@
 'use strict'
 
+const request = require('request')
+
+
 exports.handle = function handle(client) {
   const sayHello = client.createStep({
     satisfied() {
@@ -53,7 +56,6 @@ exports.handle = function handle(client) {
   })
 
 
-  const request = require('request')
 
 const getCity = client.createStep({
   satisfied() {
@@ -67,7 +69,7 @@ const getCity = client.createStep({
       }
 
       client.setConversationState({city: 'Chicago'})
-      client.done()
+      done()
     })
   }
 })
