@@ -52,6 +52,28 @@ exports.handle = function handle(client) {
     }
   })
 
+
+  const request = require('request')
+
+const getCity = client.createStep({
+  satisfied() {
+    return false
+  },
+
+  prompt(done) {
+    request('https://httpbin.org/get', (err, res, body) => {
+      if (err) {
+        throw new Error(err)
+      }
+
+      client.setConversationState({city: 'Chicago'})
+      client.done()
+    })
+  }
+})
+
+
+
   client.runFlow({
     classifications: {
       goodbye: 'goodbye',
@@ -60,7 +82,7 @@ exports.handle = function handle(client) {
     streams: {
       goodbye: handleGoodbye,
       greeting: handleGreeting,
-      main: 'onboarding',
+      main: 'onboarding', 
       onboarding: [sayHello],
       end: [untrained]
     }
