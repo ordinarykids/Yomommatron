@@ -80,7 +80,7 @@ const getCity = client.createStep({
       greeting: 'greeting'
     },
     streams: {
-      goodbye: handleGoodbye,
+      goodbye: getCity,
       greeting: handleGreeting,
       main: 'onboarding', 
       onboarding: [sayHello],
